@@ -40,6 +40,9 @@ heart_label.grid(row=3, column=2, padx=10, pady=10)
 
 def ai_turn():
     global clicked, count
+    # Check if the player has made a move
+    if count == 0:
+        return
     # Find all empty buttons
     empty_buttons = [b for b in buttons.values() if b["text"] == " "]
     if empty_buttons:
@@ -76,6 +79,8 @@ def player_turn():
         disable_b()
     else:
         clicked = not clicked
+    # Call ai_turn() after the player has made a move
+    ai_turn()
 
 #check for X win
 def won():
@@ -262,10 +267,10 @@ def b_click(b):
         count += 1
         won()
         
-        # Check if it's the AI's turn now
+
         if not clicked and not winner:
             ai_turn()
-    # If the AI starts, make the AI's move
+
 
 def reset():
     global buttons, clicked, count
